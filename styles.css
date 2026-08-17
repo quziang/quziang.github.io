@@ -72,11 +72,11 @@ button { font: inherit; color: inherit; }
 }
 
 .hero {
-  min-height: 560px;
+  min-height: 500px;
   border-bottom: 1px solid var(--line);
 }
 .hero-main {
-  padding: 92px 54px 78px 0;
+  padding: 82px 54px 68px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -86,14 +86,14 @@ button { font: inherit; color: inherit; }
 }
 .display-name {
   margin: 0;
-  font-size: clamp(72px, 9vw, 132px);
-  line-height: .83;
-  letter-spacing: -.075em;
+  font-size: clamp(48px, 5.8vw, 78px);
+  line-height: .9;
+  letter-spacing: -.055em;
   font-weight: 700;
 }
 .display-name span { display: block; }
 .hero-meta {
-  margin-top: 84px;
+  margin-top: 68px;
   max-width: 310px;
 }
 .hero-meta p {
@@ -218,9 +218,10 @@ button { font: inherit; color: inherit; }
     width: min(calc(100% - 32px), var(--max));
     grid-template-columns: 34% 66%;
   }
-  .hero { min-height: 500px; }
-  .hero-main { padding-top: 70px; padding-right: 26px; }
-  .display-name { font-size: clamp(58px, 16vw, 94px); }
+  .hero { min-height: 450px; }
+  .hero-main { padding-top: 64px; padding-right: 26px; padding-bottom: 54px; }
+  .display-name { font-size: clamp(44px, 9vw, 64px); }
+  .hero-meta { margin-top: 54px; }
   .hero-meta p { font-size: 16px; }
   .edu-year { font-size: 28px; padding-right: 24px; }
   .edu-detail { grid-template-columns: 64px 1fr; gap: 24px; }
@@ -241,17 +242,17 @@ button { font: inherit; color: inherit; }
   }
   .page-grid { grid-template-columns: 1fr; }
   .hero {
-    min-height: 470px;
+    min-height: 400px;
     display: block;
     position: relative;
   }
   .hero-main {
-    min-height: 470px;
-    padding: 68px 0 44px;
+    min-height: 400px;
+    padding: 58px 0 38px;
   }
   .hero-void { display: none; }
-  .display-name { font-size: clamp(64px, 25vw, 102px); }
-  .hero-meta { margin-top: 72px; }
+  .display-name { font-size: clamp(44px, 15vw, 62px); }
+  .hero-meta { margin-top: 56px; }
   .section-code { display: none; }
   .section-title-wrap {
     border-left: 0;
