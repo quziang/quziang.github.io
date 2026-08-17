@@ -8,61 +8,85 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="header">
-    <div class="wrap header-inner">
-      <a class="wordmark" href="#top">quziang</a>
-      <div class="header-actions">
-        <a href="#education" data-zh="教育" data-en="Education">教育</a>
-        <a href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub</a>
-        <button id="langToggle" type="button" aria-label="Switch language">EN</button>
+  <header class="topbar">
+    <div class="page-grid topbar-grid">
+      <a class="micro-mark" href="#top" aria-label="quziang home">QZ</a>
+      <div class="topbar-right">
+        <a class="github-link" href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <div class="language-switch" aria-label="Language">
+          <button class="lang-option" type="button" data-lang="zh">中</button>
+          <span>/</span>
+          <button class="lang-option" type="button" data-lang="en">EN</button>
+        </div>
       </div>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero wrap">
-      <h1 class="hero-name">quziang</h1>
-      <div class="hero-info">
-        <p data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</p>
-        <p data-zh="硕士研究生 · 2024—2027" data-en="Master's Student · 2024—2027">硕士研究生 · 2024—2027</p>
+    <section class="hero page-grid">
+      <div class="hero-main">
+        <h1 class="display-name" aria-label="quziang">
+          <span>QU</span>
+          <span>ZIANG</span>
+        </h1>
+        <div class="hero-meta">
+          <p data-zh="硕士研究生" data-en="Master's Student">硕士研究生</p>
+          <p data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</p>
+        </div>
       </div>
+      <div class="hero-void" aria-hidden="true"></div>
     </section>
 
-    <section class="education wrap" id="education">
-      <div class="education-heading">
-        <span>EDUCATION</span>
-        <h2 data-zh="教育经历" data-en="Education">教育经历</h2>
+    <section class="education" id="education">
+      <div class="page-grid section-head">
+        <div class="section-code">01</div>
+        <div class="section-title-wrap">
+          <p class="section-kicker">EDUCATION</p>
+          <h2 data-zh="教育经历" data-en="Education">教育经历</h2>
+        </div>
       </div>
 
-      <div class="edu-list">
-        <article class="edu-item">
-          <div class="logo">
-            <img src="assets/ucas-emblem.svg" alt="中国科学院大学院徽">
+      <div class="edu-table">
+        <article class="edu-row page-grid">
+          <div class="edu-year">
+            <span>2024</span>
+            <span class="year-dash">—</span>
+            <span>2027</span>
           </div>
-          <div class="school">
-            <h3 data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</h3>
-            <p data-zh="硕士研究生" data-en="Master's Student">硕士研究生</p>
+          <div class="edu-detail">
+            <div class="school-emblem">
+              <img src="assets/ucas-emblem.svg" alt="中国科学院大学校徽">
+            </div>
+            <div class="school-copy">
+              <h3 data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</h3>
+              <p data-zh="硕士研究生" data-en="Master's Student">硕士研究生</p>
+            </div>
           </div>
-          <time>2024—2027</time>
         </article>
 
-        <article class="edu-item">
-          <div class="logo">
-            <img src="assets/nefu-emblem.svg" alt="东北林业大学院徽">
+        <article class="edu-row page-grid">
+          <div class="edu-year">
+            <span>2020</span>
+            <span class="year-dash">—</span>
+            <span>2024</span>
           </div>
-          <div class="school">
-            <h3 data-zh="东北林业大学" data-en="Northeast Forestry University">东北林业大学</h3>
-            <p data-zh="本科" data-en="Bachelor's Degree">本科</p>
+          <div class="edu-detail">
+            <div class="school-emblem">
+              <img src="assets/nefu-emblem.svg" alt="东北林业大学校徽">
+            </div>
+            <div class="school-copy">
+              <h3 data-zh="东北林业大学" data-en="Northeast Forestry University">东北林业大学</h3>
+              <p data-zh="本科" data-en="Bachelor's Degree">本科</p>
+            </div>
           </div>
-          <time>2020—2024</time>
         </article>
       </div>
     </section>
   </main>
 
-  <footer class="footer wrap">
-    <span>© <span id="year"></span> quziang</span>
-    <a href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub ↗</a>
+  <footer class="footer page-grid">
+    <div>© <span id="year"></span> quziang</div>
+    <div class="footer-note" data-zh="个人主页" data-en="Personal site">个人主页</div>
   </footer>
 
   <script src="script.js"></script>
