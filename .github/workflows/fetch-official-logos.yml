@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   inspect:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch and convert UCAS official vector
+      - name: Inspect UCAS official vector source
         shell: bash
         run: |
           set -euxo pipefail
@@ -24,12 +24,9 @@ jobs:
           unzip -q /tmp/ucas.zip -d /tmp/ucas
           AI_FILE="$(find /tmp/ucas -type f -iname '*.ai' | head -1)"
           echo "AI_FILE=$AI_FILE"
-          test -n "$AI_FILE"
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq inkscape
-          inkscape "$AI_FILE" --export-plain-svg --export-filename=assets/ucas-official-source.svg
-          file assets/ucas-official-source.svg
-          ls -lh assets/ucas-official-source.svg
+          file "$AI_FILE"
+          ls -lh "$AI_FILE"
+          head -c 256 "$AI_FILE" | xxd
 
       - name: Inspect NEFU vector mirror download page
         shell: bash
@@ -40,15 +37,3 @@ jobs:
           echo '----- CTFILE HTML -----'
           cat /tmp/nefu-download
           echo '----- END CTFILE HTML -----'
-
-      - name: Commit converted official UCAS source
-        shell: bash
-        run: |
-          set -euxo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/ucas-official-source.svg
-          if ! git diff --cached --quiet; then
-            git commit -m 'assets: add official UCAS vector source'
-            git push
-          fi
