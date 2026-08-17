@@ -50,11 +50,7 @@ jobs:
 
           DOWNURL=''
           for attempt in 1 2 3 4 5 6; do
-            RD_VALUE="$(python3 - <<'PY'
-import random
-print(random.random())
-PY
-)"
+            RD_VALUE="$(python3 -c 'import random; print(random.random())')"
             curl -fsSL -A "$UA" -e "$SHARE" \
               --get \
               --data-urlencode "uid=$UID_VALUE" \
