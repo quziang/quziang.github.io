@@ -26,7 +26,8 @@ jobs:
           AI_FILE="$(find /tmp/ucas -type f -iname '*.ai' | head -1)"
           test -n "$AI_FILE"
           file "$AI_FILE"
-          command -v pdftocairo
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq poppler-utils
           pdftocairo -svg "$AI_FILE" assets/ucas-emblem.svg
           file assets/ucas-emblem.svg
           ls -lh assets/ucas-emblem.svg
