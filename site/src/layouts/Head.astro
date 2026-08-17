@@ -15,7 +15,6 @@ interface Props {
 const { postTitle, postDescription, postSlug } = Astro.props
 const { currentLang } = getPageInfo(Astro.url.pathname)
 const currentUI = ui[currentLang as keyof typeof ui] ?? {}
-const lang = currentLang === defaultLocale ? '' : `${currentLang}/`
 
 // Site Configuration
 const { title, subtitle, description, i18nTitle, author, favicon } = themeConfig.site
@@ -38,7 +37,7 @@ const pageImage = postSlug
   ? new URL(`${base}/og/${postSlug}.png`, Astro.url.origin)
   : apiflashKey
     ? `https://api.apiflash.com/v1/urltoimage?access_key=${apiflashKey}&url=${Astro.url}&format=png&width=1500&height=788&ttl=259200&wait_until=network_idle&no_tracking=true`
-    : `https://api.apiflash.com/v1/urltoimage?access_key=02a837b6188f4ba0a7fd9fbeff03a83e&url=https://retypeset.radishzz.cc/${lang}&format=png&width=1500&height=788&ttl=604800&wait_until=network_idle&no_tracking=true`
+    : new URL(`${base}/icons/og-logo.png`, Astro.url.origin)
 ---
 
 <head>
@@ -116,24 +115,19 @@ const pageImage = postSlug
       return defaultMode === 'dark'
     }
 
-    // If defaultMode is auto, follow system preference
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   }
 
-  // Initialize theme
   function initTheme(doc = document) {
     const isDark = isCurrentDark()
     doc.documentElement.classList.toggle('dark', isDark)
 
-    // Update meta theme-color tag
     const metaThemeColor = doc.head.querySelector('meta[name="theme-color"]')
     if (metaThemeColor) {
       metaThemeColor.setAttribute('content', isDark ? darkMode : lightMode)
     }
   }
 
-  // Check and init motion preference
-  // Condition: theme config || system preference || browser capability
   function initMotionPref(doc = document) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const supportsViewTransitions = 'startViewTransition' in doc
@@ -142,21 +136,17 @@ const pageImage = postSlug
     doc.documentElement.classList.toggle('reduce-motion', shouldReduceMotion)
   }
 
-  // Update theme before page transition to prevent flashing
   document.addEventListener('astro:before-swap', ({ newDocument }) => {
     initTheme(newDocument)
     initMotionPref(newDocument)
   })
 
-  // Initialize theme on first load
   initTheme()
   initMotionPref()
 })()
 </script>
 
 <!-- Google Analytics -->
-<!-- Define gtag on window object for proper Partytown forwarding -->
-<!-- See https://github.com/QwikDev/partytown/issues/382 -->
 {googleAnalyticsID && (
   <>
     <script
