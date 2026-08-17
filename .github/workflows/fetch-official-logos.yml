@@ -7,15 +7,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   inspect:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
-      - name: Inspect UCAS official vector source
+      - name: Convert UCAS official AI/PDF vector to SVG
         shell: bash
         run: |
           set -euxo pipefail
@@ -23,17 +24,33 @@ jobs:
           rm -rf /tmp/ucas && mkdir -p /tmp/ucas
           unzip -q /tmp/ucas.zip -d /tmp/ucas
           AI_FILE="$(find /tmp/ucas -type f -iname '*.ai' | head -1)"
-          echo "AI_FILE=$AI_FILE"
+          test -n "$AI_FILE"
           file "$AI_FILE"
-          ls -lh "$AI_FILE"
-          head -c 256 "$AI_FILE" | xxd
+          command -v pdftocairo
+          pdftocairo -svg "$AI_FILE" assets/ucas-emblem.svg
+          file assets/ucas-emblem.svg
+          ls -lh assets/ucas-emblem.svg
+          head -n 3 assets/ucas-emblem.svg
 
-      - name: Inspect NEFU vector mirror download page
+      - name: Inspect CTFile download implementation for NEFU mirror
         shell: bash
         run: |
           set -euxo pipefail
-          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://url90.ctfile.com/f/56298190-1428728989-0e187a?p=urongda' -o /tmp/nefu-download
-          file /tmp/nefu-download
-          echo '----- CTFILE HTML -----'
-          cat /tmp/nefu-download
-          echo '----- END CTFILE HTML -----'
+          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://webstatic.ctfile.com/assets/js/otherdownload.js?v=20260501' -o /tmp/otherdownload.js
+          echo '----- relevant otherdownload.js lines -----'
+          grep -nEi 'template_url|download|file|pass|code|ajax|api|url' /tmp/otherdownload.js | head -240 || true
+          echo '----- complete script -----'
+          cat /tmp/otherdownload.js
+
+      - name: Commit official UCAS SVG
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/ucas-emblem.svg
+          if ! git diff --cached --quiet; then
+            git commit -m 'assets: use official UCAS vector source'
+            git pull --rebase origin main
+            git push origin main
+          fi
