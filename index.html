@@ -1,87 +1,70 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="quziang 的个人主页。" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="quziang — personal homepage">
   <title>quziang</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="name" href="#top">quziang</a>
-      <div class="header-right">
-        <nav class="nav">
-          <a href="#about" data-zh="关于" data-en="About">关于</a>
-          <a href="#education" data-zh="教育" data-en="Education">教育</a>
-          <a href="#contact" data-zh="联系" data-en="Contact">联系</a>
-        </nav>
-        <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">EN</button>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top">quziang</a>
+      <div class="header-actions">
+        <a href="#education" data-zh="教育" data-en="Education">教育</a>
+        <a href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub</a>
+        <button id="langToggle" type="button" aria-label="Switch language">EN</button>
       </div>
     </div>
   </header>
 
-  <main id="top" class="container">
-    <section class="intro">
-      <p class="intro-kicker" data-zh="学生 · 技术探索者" data-en="Student · Technology Explorer">学生 · 技术探索者</p>
-      <h1 data-zh="你好，我是 quziang。" data-en="Hi, I'm quziang.">你好，我是 quziang。</h1>
-      <p class="intro-text" data-zh="目前在中国科学院大学攻读硕士学位。我关注人工智能、视觉计算与软件技术，也在持续记录自己的学习与成长。" data-en="I am currently pursuing a master's degree at the University of Chinese Academy of Sciences. My interests include artificial intelligence, visual computing, and software technology.">目前在中国科学院大学攻读硕士学位。我关注人工智能、视觉计算与软件技术，也在持续记录自己的学习与成长。</p>
-      <a class="inline-link" href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub ↗</a>
-    </section>
-
-    <section id="about" class="content-section">
-      <div class="section-title" data-zh="关于" data-en="About">关于</div>
-      <div class="section-content">
-        <p data-zh="我喜欢研究具体的问题，也喜欢把复杂的事情做得更清楚一些。这个网站主要用于记录我的教育经历、技术兴趣，以及之后值得留下来的内容。" data-en="I like working on concrete problems and making complicated things clearer. This site is a simple record of my education, technical interests, and work worth keeping over time.">我喜欢研究具体的问题，也喜欢把复杂的事情做得更清楚一些。这个网站主要用于记录我的教育经历、技术兴趣，以及之后值得留下来的内容。</p>
+  <main id="top">
+    <section class="hero wrap">
+      <h1 class="hero-name">quziang</h1>
+      <div class="hero-info">
+        <p data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</p>
+        <p data-zh="硕士研究生 · 2024—2027" data-en="Master's Student · 2024—2027">硕士研究生 · 2024—2027</p>
       </div>
     </section>
 
-    <section id="education" class="content-section">
-      <div class="section-title" data-zh="教育" data-en="Education">教育</div>
-      <div class="section-content education-list">
-        <article class="education-item">
-          <div class="logo-box">
-            <img src="https://news.ucas.ac.cn/images/2023-10/00054aec6de543d4981cb764b90a4387.png" alt="中国科学院大学校徽" />
+    <section class="education wrap" id="education">
+      <div class="education-heading">
+        <span>EDUCATION</span>
+        <h2 data-zh="教育经历" data-en="Education">教育经历</h2>
+      </div>
+
+      <div class="edu-list">
+        <article class="edu-item">
+          <div class="logo">
+            <span class="logo-fallback">UCAS</span>
+            <img src="https://news.ucas.ac.cn/images/2023-10/00054aec6de543d4981cb764b90a4387.png" alt="中国科学院大学校徽" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
           </div>
-          <div class="education-main">
-            <div class="education-heading">
-              <h2 data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</h2>
-              <span>2024 — 2027</span>
-            </div>
+          <div class="school">
+            <h3 data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</h3>
             <p data-zh="硕士研究生" data-en="Master's Student">硕士研究生</p>
           </div>
+          <time>2024—2027</time>
         </article>
 
-        <article class="education-item">
-          <div class="logo-box">
-            <img src="https://cdn.urongda.com/images/normal/medium/northeast-forestry-university-logo-1024px.png" alt="东北林业大学校徽" />
+        <article class="edu-item">
+          <div class="logo">
+            <span class="logo-fallback">NEFU</span>
+            <img class="nefu-logo" src="https://culture.nefu.edu.cn/images/home_80.png" alt="东北林业大学校徽" onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';">
           </div>
-          <div class="education-main">
-            <div class="education-heading">
-              <h2 data-zh="东北林业大学" data-en="Northeast Forestry University">东北林业大学</h2>
-              <span>2020 — 2024</span>
-            </div>
+          <div class="school">
+            <h3 data-zh="东北林业大学" data-en="Northeast Forestry University">东北林业大学</h3>
             <p data-zh="本科" data-en="Bachelor's Degree">本科</p>
           </div>
+          <time>2020—2024</time>
         </article>
-      </div>
-    </section>
-
-    <section id="contact" class="content-section contact-section">
-      <div class="section-title" data-zh="联系" data-en="Contact">联系</div>
-      <div class="section-content">
-        <p data-zh="目前可以通过 GitHub 找到我。" data-en="You can currently find me on GitHub.">目前可以通过 GitHub 找到我。</p>
-        <a class="inline-link" href="https://github.com/quziang" target="_blank" rel="noreferrer">github.com/quziang ↗</a>
       </div>
     </section>
   </main>
 
-  <footer class="container footer">
+  <footer class="footer wrap">
     <span>© <span id="year"></span> quziang</span>
+    <a href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub ↗</a>
   </footer>
 
   <script src="script.js"></script>
