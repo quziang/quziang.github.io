@@ -10,48 +10,98 @@ permissions:
   contents: write
 
 jobs:
-  inspect:
+  fetch-nefu:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
-      - name: Convert UCAS official AI/PDF vector to SVG
+      - name: Fetch NEFU SVG mirror of official VIS asset
         shell: bash
         run: |
           set -euxo pipefail
-          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://www.ucas.ac.cn/docs//2023-07/45f41b07373b4c15bfcc5816cc35c0e9.zip' -o /tmp/ucas.zip
-          rm -rf /tmp/ucas && mkdir -p /tmp/ucas
-          unzip -q /tmp/ucas.zip -d /tmp/ucas
-          AI_FILE="$(find /tmp/ucas -type f -iname '*.ai' | head -1)"
-          test -n "$AI_FILE"
-          file "$AI_FILE"
-          sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq poppler-utils
-          pdftocairo -svg "$AI_FILE" assets/ucas-emblem.svg
-          file assets/ucas-emblem.svg
-          ls -lh assets/ucas-emblem.svg
-          head -n 3 assets/ucas-emblem.svg
+          SHARE='https://url90.ctfile.com/f/56298190-1428728989-0e187a?p=urongda'
+          API='https://webapi.ctfile.com'
+          UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/148 Safari/537.36'
 
-      - name: Inspect CTFile download implementation for NEFU mirror
-        shell: bash
-        run: |
-          set -euxo pipefail
-          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://webstatic.ctfile.com/assets/js/otherdownload.js?v=20260501' -o /tmp/otherdownload.js
-          echo '----- relevant otherdownload.js lines -----'
-          grep -nEi 'template_url|download|file|pass|code|ajax|api|url' /tmp/otherdownload.js | head -240 || true
-          echo '----- complete script -----'
-          cat /tmp/otherdownload.js
+          curl -fsSL -A "$UA" -e "$SHARE" \
+            --get \
+            --data-urlencode 'path=f' \
+            --data-urlencode 'f=56298190-1428728989-0e187a' \
+            --data-urlencode 'passcode=urongda' \
+            "$API/getfile.php" -o /tmp/nefu-info.json
+          cat /tmp/nefu-info.json
+          test "$(jq -r '.code')" = '200'
 
-      - name: Commit official UCAS SVG
+          UID_VALUE="$(jq -r '.file.userid // .userid' /tmp/nefu-info.json)"
+          FID_VALUE="$(jq -r '.file.file_id // .file_id' /tmp/nefu-info.json)"
+          CHK_VALUE="$(jq -r '.file.file_chk // .file_chk' /tmp/nefu-info.json)"
+          START_VALUE="$(jq -r '.file.start_time // .start_time // 0' /tmp/nefu-info.json)"
+          WAIT_VALUE="$(jq -r '.file.wait_seconds // .wait_seconds // 0' /tmp/nefu-info.json)"
+          NAME_VALUE="$(jq -r '.file.file_name // .file_name // empty' /tmp/nefu-info.json)"
+          echo "file=$NAME_VALUE uid=$UID_VALUE fid=$FID_VALUE wait=$WAIT_VALUE"
+          test -n "$UID_VALUE"
+          test -n "$FID_VALUE"
+          test -n "$CHK_VALUE"
+
+          if [ "$WAIT_VALUE" -gt 0 ] 2>/dev/null; then
+            sleep $((WAIT_VALUE + 1))
+          fi
+
+          DOWNURL=''
+          for attempt in 1 2 3 4 5 6; do
+            RD_VALUE="$(python3 - <<'PY'
+import random
+print(random.random())
+PY
+)"
+            curl -fsSL -A "$UA" -e "$SHARE" \
+              --get \
+              --data-urlencode "uid=$UID_VALUE" \
+              --data-urlencode "fid=$FID_VALUE" \
+              --data-urlencode "file_chk=$CHK_VALUE" \
+              --data-urlencode "start_time=$START_VALUE" \
+              --data-urlencode "wait_seconds=$WAIT_VALUE" \
+              --data-urlencode "rd=$RD_VALUE" \
+              "$API/get_down_url.php" -o /tmp/nefu-down.json || true
+            cat /tmp/nefu-down.json || true
+            DOWNURL="$(jq -r '.downurl // empty' /tmp/nefu-down.json 2>/dev/null || true)"
+            [ -n "$DOWNURL" ] && break
+            sleep 2
+          done
+          test -n "$DOWNURL"
+
+          curl -fL --retry 3 -A "$UA" -e "$SHARE" "$DOWNURL" -o /tmp/nefu-vector
+          file /tmp/nefu-vector
+          ls -lh /tmp/nefu-vector
+
+          if grep -aq '<svg' /tmp/nefu-vector; then
+            cp /tmp/nefu-vector assets/nefu-emblem.svg
+          elif [ "$(file -b --mime-type /tmp/nefu-vector)" = 'application/zip' ]; then
+            rm -rf /tmp/nefu-unzip && mkdir /tmp/nefu-unzip
+            unzip -q /tmp/nefu-vector -d /tmp/nefu-unzip
+            SVG_FILE="$(find /tmp/nefu-unzip -type f -iname '*.svg' | head -1)"
+            test -n "$SVG_FILE"
+            cp "$SVG_FILE" assets/nefu-emblem.svg
+          else
+            echo 'Downloaded NEFU asset is not SVG or ZIP' >&2
+            exit 1
+          fi
+
+          grep -aq '<svg' assets/nefu-emblem.svg
+          file assets/nefu-emblem.svg
+          ls -lh assets/nefu-emblem.svg
+          head -n 3 assets/nefu-emblem.svg
+
+      - name: Commit NEFU vector asset
         shell: bash
         run: |
           set -euxo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/ucas-emblem.svg
+          git add assets/nefu-emblem.svg
           if ! git diff --cached --quiet; then
-            git commit -m 'assets: use official UCAS vector source'
+            git commit -m 'assets: use NEFU official VIS vector mirror'
             git pull --rebase origin main
             git push origin main
           fi
