@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">中国科学院大学院徽</title>
+  <desc id="desc">中国科学院大学使用的中国科学院圆形院徽矢量图。</desc>
+  <defs>
+    <path id="topArc" d="M 72 256 A 184 184 0 0 1 440 256"/>
+    <path id="bottomArc" d="M 440 256 A 184 184 0 0 1 72 256"/>
+  </defs>
+  <g fill="none" stroke="#15479A">
+    <circle cx="256" cy="256" r="244" stroke-width="8"/>
+    <circle cx="256" cy="256" r="228" stroke-width="3"/>
+    <circle cx="256" cy="256" r="174" stroke-width="7"/>
+  </g>
+  <g fill="#15479A">
+    <text font-family="KaiTi, STKaiti, 'Noto Serif SC', serif" font-size="38" letter-spacing="15">
+      <textPath href="#topArc" startOffset="50%" text-anchor="middle">中国科学院</textPath>
+    </text>
+    <text font-family="Georgia, 'Times New Roman', serif" font-size="25" letter-spacing="2.5">
+      <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">CHINESE ACADEMY OF SCIENCES</textPath>
+    </text>
+  </g>
+  <g transform="translate(256 252)" fill="#15479A">
+    <g id="petal">
+      <path d="M-29-137 L31-153 L68-73 L26-15 L-25-28 L-47-76 Z"/>
+    </g>
+    <use href="#petal" transform="rotate(60)"/>
+    <use href="#petal" transform="rotate(120)"/>
+    <use href="#petal" transform="rotate(180)"/>
+    <use href="#petal" transform="rotate(240)"/>
+    <use href="#petal" transform="rotate(300)"/>
+    <circle cx="0" cy="0" r="31" fill="#fff"/>
+    <path d="M0-37 L10-29 L23-31 L29-19 L39-11 L35 2 L39 14 L28 23 L24 36 L10 35 L0 43 L-10 35 L-24 36 L-28 23 L-39 14 L-35 2 L-39-11 L-29-19 L-23-31 L-10-29 Z" fill="#fff"/>
+    <circle cx="0" cy="0" r="19"/>
+    <g fill="#fff">
+      <circle cx="0" cy="-78" r="10"/>
+      <circle cx="68" cy="-39" r="10"/>
+      <circle cx="68" cy="39" r="10"/>
+      <circle cx="0" cy="78" r="10"/>
+      <circle cx="-68" cy="39" r="10"/>
+      <circle cx="-68" cy="-39" r="10"/>
+    </g>
+  </g>
+</svg>
