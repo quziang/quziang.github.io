@@ -132,72 +132,6 @@ lang: en
 </div>
 EOF
 
-mkdir -p .github/workflows
-cat > .github/workflows/build-site.yml <<'EOF'
-name: Build Retypeset site
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'site/**'
-      - '.github/workflows/build-site.yml'
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.33.0
-          run_install: false
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-          cache-dependency-path: site/pnpm-lock.yaml
-
-      - name: Install dependencies
-        working-directory: site
-        run: pnpm install --frozen-lockfile
-
-      - name: Build Retypeset
-        working-directory: site
-        run: pnpm build
-
-      - name: Sync generated site to Pages root
-        shell: bash
-        run: |
-          set -euxo pipefail
-          rsync -a --delete \
-            --exclude '.git/' \
-            --exclude '.github/' \
-            --exclude 'site/' \
-            --exclude 'CNAME' \
-            site/dist/ ./
-          touch .nojekyll
-
-      - name: Commit generated Pages output
-        shell: bash
-        run: |
-          set -euxo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m 'build: publish Retypeset site'
-            git push origin main
-          fi
-EOF
-
 cd site
 pnpm install --frozen-lockfile
 pnpm build
@@ -210,9 +144,6 @@ rsync -a --delete \
   --exclude 'CNAME' \
   site/dist/ ./
 touch .nojekyll
-
-rm -f .github/workflows/migrate-retypeset.yml
-rm -f .github/scripts/migrate-retypeset.sh
 
 git config user.name 'github-actions[bot]'
 git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
