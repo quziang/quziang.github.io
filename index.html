@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="quziang 的个人主页，记录经历与思考。" />
+  <meta name="description" content="quziang 的个人主页，记录教育经历与个人思考。" />
   <title>quziang — Personal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +15,11 @@
     <div class="container nav-wrap">
       <a class="brand" href="#top">Q.</a>
       <nav class="nav">
-        <a href="#about">关于</a>
-        <a href="#experience">经历</a>
-        <a href="#contact">联系</a>
+        <a href="#about" data-zh="关于" data-en="About">关于</a>
+        <a href="#education" data-zh="教育" data-en="Education">教育</a>
+        <a href="#contact" data-zh="联系" data-en="Contact">联系</a>
       </nav>
+      <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">EN</button>
     </div>
   </header>
 
@@ -27,53 +28,51 @@
       <div class="hero-copy">
         <p class="eyebrow">HELLO, I'M</p>
         <h1>quziang</h1>
-        <p class="hero-lead">持续探索技术、产品与真实世界之间的连接。</p>
-        <p class="hero-note">这里记录我的经历，以及一些值得长期保留的想法。</p>
+        <p class="hero-lead" data-zh="持续探索技术、产品与真实世界之间的连接。" data-en="Exploring the connections between technology, products, and the real world.">持续探索技术、产品与真实世界之间的连接。</p>
+        <p class="hero-note" data-zh="这里记录我的学习经历、个人成长，以及一些值得长期保留的想法。" data-en="A place for my academic journey, personal growth, and ideas worth keeping over time.">这里记录我的学习经历、个人成长，以及一些值得长期保留的想法。</p>
         <div class="hero-actions">
-          <a class="button primary" href="#experience">查看经历</a>
+          <a class="button primary" href="#education" data-zh="查看教育经历" data-en="View Education">查看教育经历</a>
           <a class="button ghost" href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
       </div>
-      <div class="hero-mark" aria-hidden="true">
-        <span>Q</span>
-      </div>
+      <div class="hero-mark" aria-hidden="true"><span>Q</span></div>
     </section>
 
     <section id="about" class="section container">
       <div class="section-label">01 / ABOUT</div>
       <div class="section-grid">
-        <h2>关于我</h2>
+        <h2 data-zh="关于我" data-en="About Me">关于我</h2>
         <div class="prose">
-          <p>我喜欢把复杂的问题拆开，再用更简单、可靠的方式重新组合起来。关注软件、AI、产品设计，也对工程之外的人与世界保持兴趣。</p>
-          <p>这个页面不会追求信息堆叠，而是保留真正重要的部分：做过什么、为什么做，以及从中学到了什么。</p>
+          <p data-zh="我喜欢把复杂的问题拆开，再用更简单、可靠的方式重新组合起来。关注软件、AI 与视觉计算，也对工程之外的人与世界保持兴趣。" data-en="I enjoy breaking complex problems down and rebuilding them in simpler, more reliable ways. My interests include software, AI, and visual computing, while I stay curious about the world beyond engineering.">我喜欢把复杂的问题拆开，再用更简单、可靠的方式重新组合起来。关注软件、AI 与视觉计算，也对工程之外的人与世界保持兴趣。</p>
+          <p data-zh="这个页面会持续记录我真实的学习轨迹与成长。" data-en="This page will continue to document my real academic journey and growth.">这个页面会持续记录我真实的学习轨迹与成长。</p>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="section container">
-      <div class="section-label">02 / EXPERIENCE</div>
+    <section id="education" class="section container">
+      <div class="section-label">02 / EDUCATION</div>
       <div class="section-grid">
-        <h2>经历</h2>
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-meta">2025 — NOW</div>
-            <div>
-              <h3>独立探索 / 个人项目</h3>
-              <p>围绕 AI、视觉计算和自动化持续做实验，把想法快速做成真正可运行的东西。</p>
+        <h2 data-zh="教育经历" data-en="Education">教育经历</h2>
+        <div class="education-list">
+          <article class="education-card">
+            <div class="school-logo-wrap">
+              <img class="school-logo" src="https://news.ucas.ac.cn/images/2023-10/00054aec6de543d4981cb764b90a4387.png" alt="中国科学院大学校徽" />
+            </div>
+            <div class="education-content">
+              <div class="education-topline"><span>2024 — 2027</span><span data-zh="硕士" data-en="Master's">硕士</span></div>
+              <h3 data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</h3>
+              <p data-zh="硕士研究生 · 2024—2027" data-en="Master's Student · 2024—2027">硕士研究生 · 2024—2027</p>
             </div>
           </article>
-          <article class="timeline-item">
-            <div class="timeline-meta">2023 — 2025</div>
-            <div>
-              <h3>技术与产品实践</h3>
-              <p>从需求、设计到实现，参与完整的软件构建过程，逐渐形成对工程质量与产品体验的共同关注。</p>
+
+          <article class="education-card">
+            <div class="school-logo-wrap">
+              <img class="school-logo" src="https://cdn.urongda.com/images/normal/medium/northeast-forestry-university-logo-1024px.png" alt="东北林业大学校徽" />
             </div>
-          </article>
-          <article class="timeline-item">
-            <div class="timeline-meta">EARLIER</div>
-            <div>
-              <h3>学习与积累</h3>
-              <p>从代码开始认识世界，在持续解决具体问题的过程中建立技术直觉与长期兴趣。</p>
+            <div class="education-content">
+              <div class="education-topline"><span>2020 — 2024</span><span data-zh="本科" data-en="Bachelor's">本科</span></div>
+              <h3 data-zh="东北林业大学" data-en="Northeast Forestry University">东北林业大学</h3>
+              <p data-zh="本科 · 2020—2024" data-en="Bachelor's Degree · 2020—2024">本科 · 2020—2024</p>
             </div>
           </article>
         </div>
@@ -83,9 +82,9 @@
     <section id="contact" class="section contact-section container">
       <div class="section-label">03 / CONTACT</div>
       <div class="section-grid">
-        <h2>保持联系</h2>
+        <h2 data-zh="保持联系" data-en="Contact">保持联系</h2>
         <div class="prose">
-          <p>如果你对我的技术方向或某个想法感兴趣，可以从 GitHub 找到我。</p>
+          <p data-zh="如果你对我的研究方向、技术兴趣或某个想法感兴趣，可以从 GitHub 找到我。" data-en="If you're interested in my research direction, technical interests, or ideas, you can find me on GitHub.">如果你对我的研究方向、技术兴趣或某个想法感兴趣，可以从 GitHub 找到我。</p>
           <a class="text-link" href="https://github.com/quziang" target="_blank" rel="noreferrer">github.com/quziang ↗</a>
         </div>
       </div>
@@ -94,7 +93,7 @@
 
   <footer class="footer container">
     <span>© <span id="year"></span> quziang</span>
-    <span>Built simply. Kept intentionally.</span>
+    <span data-zh="保持简单，也保持真实。" data-en="Kept simple. Kept real.">保持简单，也保持真实。</span>
   </footer>
 
   <script src="script.js"></script>
