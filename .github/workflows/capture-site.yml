@@ -1,0 +1,54 @@
+name: Capture site screenshots
+
+on:
+  push:
+    paths:
+      - '.github/workflows/capture-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Wait for site and inspect browser
+        shell: bash
+        run: |
+          set -euxo pipefail
+          for i in {1..20}; do
+            if curl -fsSL --max-time 10 https://quziang.github.io/ >/tmp/index.html; then
+              break
+            fi
+            sleep 3
+          done
+          test -s /tmp/index.html
+          (google-chrome --version || chromium-browser --version || chromium --version)
+
+      - name: Capture desktop
+        shell: bash
+        run: |
+          set -euxo pipefail
+          BROWSER="$(command -v google-chrome || command -v chromium-browser || command -v chromium)"
+          "$BROWSER" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=1440,1200 --virtual-time-budget=5000 --screenshot=quziang-desktop.png https://quziang.github.io/
+          file quziang-desktop.png
+
+      - name: Capture mobile
+        shell: bash
+        run: |
+          set -euxo pipefail
+          BROWSER="$(command -v google-chrome || command -v chromium-browser || command -v chromium)"
+          "$BROWSER" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=390,844 --virtual-time-budget=5000 --screenshot=quziang-mobile.png https://quziang.github.io/
+          file quziang-mobile.png
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: quziang-site-screenshots
+          path: |
+            quziang-desktop.png
+            quziang-mobile.png
+          if-no-files-found: error
+          retention-days: 1
