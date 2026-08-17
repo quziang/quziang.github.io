@@ -3,97 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="quziang 的个人主页，记录教育经历与个人思考。" />
-  <title>quziang — Personal</title>
+  <meta name="description" content="quziang 的个人主页。" />
+  <title>quziang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="#top">Q.</a>
-      <nav class="nav">
-        <a href="#about" data-zh="关于" data-en="About">关于</a>
-        <a href="#education" data-zh="教育" data-en="Education">教育</a>
-        <a href="#contact" data-zh="联系" data-en="Contact">联系</a>
-      </nav>
-      <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">EN</button>
+    <div class="container header-inner">
+      <a class="name" href="#top">quziang</a>
+      <div class="header-right">
+        <nav class="nav">
+          <a href="#about" data-zh="关于" data-en="About">关于</a>
+          <a href="#education" data-zh="教育" data-en="Education">教育</a>
+          <a href="#contact" data-zh="联系" data-en="Contact">联系</a>
+        </nav>
+        <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">EN</button>
+      </div>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero container">
-      <div class="hero-copy">
-        <p class="eyebrow">HELLO, I'M</p>
-        <h1>quziang</h1>
-        <p class="hero-lead" data-zh="持续探索技术、产品与真实世界之间的连接。" data-en="Exploring the connections between technology, products, and the real world.">持续探索技术、产品与真实世界之间的连接。</p>
-        <p class="hero-note" data-zh="这里记录我的学习经历、个人成长，以及一些值得长期保留的想法。" data-en="A place for my academic journey, personal growth, and ideas worth keeping over time.">这里记录我的学习经历、个人成长，以及一些值得长期保留的想法。</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#education" data-zh="查看教育经历" data-en="View Education">查看教育经历</a>
-          <a class="button ghost" href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub ↗</a>
-        </div>
-      </div>
-      <div class="hero-mark" aria-hidden="true"><span>Q</span></div>
+  <main id="top" class="container">
+    <section class="intro">
+      <p class="intro-kicker" data-zh="学生 · 技术探索者" data-en="Student · Technology Explorer">学生 · 技术探索者</p>
+      <h1 data-zh="你好，我是 quziang。" data-en="Hi, I'm quziang.">你好，我是 quziang。</h1>
+      <p class="intro-text" data-zh="目前在中国科学院大学攻读硕士学位。我关注人工智能、视觉计算与软件技术，也在持续记录自己的学习与成长。" data-en="I am currently pursuing a master's degree at the University of Chinese Academy of Sciences. My interests include artificial intelligence, visual computing, and software technology.">目前在中国科学院大学攻读硕士学位。我关注人工智能、视觉计算与软件技术，也在持续记录自己的学习与成长。</p>
+      <a class="inline-link" href="https://github.com/quziang" target="_blank" rel="noreferrer">GitHub ↗</a>
     </section>
 
-    <section id="about" class="section container">
-      <div class="section-label">01 / ABOUT</div>
-      <div class="section-grid">
-        <h2 data-zh="关于我" data-en="About Me">关于我</h2>
-        <div class="prose">
-          <p data-zh="我喜欢把复杂的问题拆开，再用更简单、可靠的方式重新组合起来。关注软件、AI 与视觉计算，也对工程之外的人与世界保持兴趣。" data-en="I enjoy breaking complex problems down and rebuilding them in simpler, more reliable ways. My interests include software, AI, and visual computing, while I stay curious about the world beyond engineering.">我喜欢把复杂的问题拆开，再用更简单、可靠的方式重新组合起来。关注软件、AI 与视觉计算，也对工程之外的人与世界保持兴趣。</p>
-          <p data-zh="这个页面会持续记录我真实的学习轨迹与成长。" data-en="This page will continue to document my real academic journey and growth.">这个页面会持续记录我真实的学习轨迹与成长。</p>
-        </div>
+    <section id="about" class="content-section">
+      <div class="section-title" data-zh="关于" data-en="About">关于</div>
+      <div class="section-content">
+        <p data-zh="我喜欢研究具体的问题，也喜欢把复杂的事情做得更清楚一些。这个网站主要用于记录我的教育经历、技术兴趣，以及之后值得留下来的内容。" data-en="I like working on concrete problems and making complicated things clearer. This site is a simple record of my education, technical interests, and work worth keeping over time.">我喜欢研究具体的问题，也喜欢把复杂的事情做得更清楚一些。这个网站主要用于记录我的教育经历、技术兴趣，以及之后值得留下来的内容。</p>
       </div>
     </section>
 
-    <section id="education" class="section container">
-      <div class="section-label">02 / EDUCATION</div>
-      <div class="section-grid">
-        <h2 data-zh="教育经历" data-en="Education">教育经历</h2>
-        <div class="education-list">
-          <article class="education-card">
-            <div class="school-logo-wrap">
-              <img class="school-logo" src="https://news.ucas.ac.cn/images/2023-10/00054aec6de543d4981cb764b90a4387.png" alt="中国科学院大学校徽" />
+    <section id="education" class="content-section">
+      <div class="section-title" data-zh="教育" data-en="Education">教育</div>
+      <div class="section-content education-list">
+        <article class="education-item">
+          <div class="logo-box">
+            <img src="https://news.ucas.ac.cn/images/2023-10/00054aec6de543d4981cb764b90a4387.png" alt="中国科学院大学校徽" />
+          </div>
+          <div class="education-main">
+            <div class="education-heading">
+              <h2 data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</h2>
+              <span>2024 — 2027</span>
             </div>
-            <div class="education-content">
-              <div class="education-topline"><span>2024 — 2027</span><span data-zh="硕士" data-en="Master's">硕士</span></div>
-              <h3 data-zh="中国科学院大学" data-en="University of Chinese Academy of Sciences">中国科学院大学</h3>
-              <p data-zh="硕士研究生 · 2024—2027" data-en="Master's Student · 2024—2027">硕士研究生 · 2024—2027</p>
-            </div>
-          </article>
+            <p data-zh="硕士研究生" data-en="Master's Student">硕士研究生</p>
+          </div>
+        </article>
 
-          <article class="education-card">
-            <div class="school-logo-wrap">
-              <img class="school-logo" src="https://cdn.urongda.com/images/normal/medium/northeast-forestry-university-logo-1024px.png" alt="东北林业大学校徽" />
+        <article class="education-item">
+          <div class="logo-box">
+            <img src="https://cdn.urongda.com/images/normal/medium/northeast-forestry-university-logo-1024px.png" alt="东北林业大学校徽" />
+          </div>
+          <div class="education-main">
+            <div class="education-heading">
+              <h2 data-zh="东北林业大学" data-en="Northeast Forestry University">东北林业大学</h2>
+              <span>2020 — 2024</span>
             </div>
-            <div class="education-content">
-              <div class="education-topline"><span>2020 — 2024</span><span data-zh="本科" data-en="Bachelor's">本科</span></div>
-              <h3 data-zh="东北林业大学" data-en="Northeast Forestry University">东北林业大学</h3>
-              <p data-zh="本科 · 2020—2024" data-en="Bachelor's Degree · 2020—2024">本科 · 2020—2024</p>
-            </div>
-          </article>
-        </div>
+            <p data-zh="本科" data-en="Bachelor's Degree">本科</p>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section id="contact" class="section contact-section container">
-      <div class="section-label">03 / CONTACT</div>
-      <div class="section-grid">
-        <h2 data-zh="保持联系" data-en="Contact">保持联系</h2>
-        <div class="prose">
-          <p data-zh="如果你对我的研究方向、技术兴趣或某个想法感兴趣，可以从 GitHub 找到我。" data-en="If you're interested in my research direction, technical interests, or ideas, you can find me on GitHub.">如果你对我的研究方向、技术兴趣或某个想法感兴趣，可以从 GitHub 找到我。</p>
-          <a class="text-link" href="https://github.com/quziang" target="_blank" rel="noreferrer">github.com/quziang ↗</a>
-        </div>
+    <section id="contact" class="content-section contact-section">
+      <div class="section-title" data-zh="联系" data-en="Contact">联系</div>
+      <div class="section-content">
+        <p data-zh="目前可以通过 GitHub 找到我。" data-en="You can currently find me on GitHub.">目前可以通过 GitHub 找到我。</p>
+        <a class="inline-link" href="https://github.com/quziang" target="_blank" rel="noreferrer">github.com/quziang ↗</a>
       </div>
     </section>
   </main>
 
-  <footer class="footer container">
+  <footer class="container footer">
     <span>© <span id="year"></span> quziang</span>
-    <span data-zh="保持简单，也保持真实。" data-en="Kept simple. Kept real.">保持简单，也保持真实。</span>
   </footer>
 
   <script src="script.js"></script>
