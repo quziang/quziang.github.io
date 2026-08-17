@@ -31,7 +31,7 @@ jobs:
             --data-urlencode 'passcode=urongda' \
             "$API/getfile.php" -o /tmp/nefu-info.json
           cat /tmp/nefu-info.json
-          test "$(jq -r '.code')" = '200'
+          test "$(jq -r '.code' /tmp/nefu-info.json)" = '200'
 
           UID_VALUE="$(jq -r '.file.userid // .userid' /tmp/nefu-info.json)"
           FID_VALUE="$(jq -r '.file.file_id // .file_id' /tmp/nefu-info.json)"
