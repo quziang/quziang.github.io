@@ -1,0 +1,31 @@
+name: Fetch official logo assets
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fetch-official-logos.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch UCAS official logo package
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://www.ucas.ac.cn/docs//2023-07/45f41b07373b4c15bfcc5816cc35c0e9.zip' -o /tmp/ucas.zip
+          file /tmp/ucas.zip
+          unzip -l /tmp/ucas.zip | head -100
+      - name: Fetch NEFU vector mirror
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://url90.ctfile.com/f/56298190-1428728989-0e187a?p=urongda' -o /tmp/nefu-download
+          file /tmp/nefu-download
+          ls -lh /tmp/nefu-download
+          head -c 200 /tmp/nefu-download | xxd
