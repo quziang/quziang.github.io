@@ -7,25 +7,48 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch UCAS official logo package
+
+      - name: Fetch and convert UCAS official vector
         shell: bash
         run: |
           set -euxo pipefail
           curl -fL --retry 3 -A 'Mozilla/5.0' 'https://www.ucas.ac.cn/docs//2023-07/45f41b07373b4c15bfcc5816cc35c0e9.zip' -o /tmp/ucas.zip
-          file /tmp/ucas.zip
-          unzip -l /tmp/ucas.zip | head -100
-      - name: Fetch NEFU vector mirror
+          rm -rf /tmp/ucas && mkdir -p /tmp/ucas
+          unzip -q /tmp/ucas.zip -d /tmp/ucas
+          AI_FILE="$(find /tmp/ucas -type f -iname '*.ai' | head -1)"
+          echo "AI_FILE=$AI_FILE"
+          test -n "$AI_FILE"
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq inkscape
+          inkscape "$AI_FILE" --export-plain-svg --export-filename=assets/ucas-official-source.svg
+          file assets/ucas-official-source.svg
+          ls -lh assets/ucas-official-source.svg
+
+      - name: Inspect NEFU vector mirror download page
         shell: bash
         run: |
           set -euxo pipefail
           curl -fL --retry 3 -A 'Mozilla/5.0' 'https://url90.ctfile.com/f/56298190-1428728989-0e187a?p=urongda' -o /tmp/nefu-download
           file /tmp/nefu-download
-          ls -lh /tmp/nefu-download
-          head -c 200 /tmp/nefu-download | xxd
+          echo '----- CTFILE HTML -----'
+          cat /tmp/nefu-download
+          echo '----- END CTFILE HTML -----'
+
+      - name: Commit converted official UCAS source
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/ucas-official-source.svg
+          if ! git diff --cached --quiet; then
+            git commit -m 'assets: add official UCAS vector source'
+            git push
+          fi
