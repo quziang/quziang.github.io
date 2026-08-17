@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/feeds/atom-style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://quziang.github.io/en/</id>
+    <title>quziang</title>
+    <updated>2026-08-17T16:53:54.852Z</updated>
+    <generator>Astro-Theme-Retypeset with Feed for Node.js</generator>
+    <author>
+        <name>quziang</name>
+        <uri>https://quziang.github.io/</uri>
+    </author>
+    <link rel="alternate" href="https://quziang.github.io/en/"/>
+    <link rel="self" href="https://quziang.github.io/en/atom.xml"/>
+    <subtitle>quziang — personal blog</subtitle>
+    <rights>Copyright © 2026 quziang</rights>
+</feed>

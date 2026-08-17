@@ -1,0 +1,15 @@
+---
+lang: zh
+---
+
+## 教育经历
+
+<div style="display:flex;align-items:center;gap:1rem;margin:1.5rem 0 2rem;">
+  <img src="/assets/ucas-emblem.svg" alt="中国科学院大学校徽" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
+  <div><strong>中国科学院大学</strong><br />硕士研究生 · 2024—2027</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:1rem;margin:0 0 2rem;">
+  <img src="/assets/nefu-emblem.svg" alt="东北林业大学校徽" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
+  <div><strong>东北林业大学</strong><br />本科 · 2020—2024</div>
+</div>

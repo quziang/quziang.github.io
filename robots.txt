@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /~partytown/
+
+Sitemap: https://quziang.github.io/sitemap-index.xml
