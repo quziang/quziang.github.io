@@ -14,10 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Wait for site and inspect browser
+      - name: Prepare capture environment
         shell: bash
         run: |
           set -euxo pipefail
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq fonts-noto-cjk poppler-utils
+          fc-cache -f
           for i in {1..20}; do
             if curl -fsSL --max-time 10 https://quziang.github.io/ >/tmp/index.html; then
               break
@@ -26,6 +29,18 @@ jobs:
           done
           test -s /tmp/index.html
           (google-chrome --version || chromium-browser --version || chromium --version)
+
+      - name: Render UCAS official source sheet for inspection
+        shell: bash
+        run: |
+          set -euxo pipefail
+          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://www.ucas.ac.cn/docs//2023-07/45f41b07373b4c15bfcc5816cc35c0e9.zip' -o /tmp/ucas.zip
+          rm -rf /tmp/ucas && mkdir -p /tmp/ucas
+          unzip -q /tmp/ucas.zip -d /tmp/ucas
+          AI_FILE="$(find /tmp/ucas -type f -iname '*.ai' | head -1)"
+          test -n "$AI_FILE"
+          pdftoppm -png -singlefile -r 110 "$AI_FILE" ucas-source-sheet
+          file ucas-source-sheet.png
 
       - name: Capture desktop
         shell: bash
@@ -46,9 +61,10 @@ jobs:
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: quziang-site-screenshots
+          name: quziang-site-screenshots-qa
           path: |
             quziang-desktop.png
             quziang-mobile.png
+            ucas-source-sheet.png
           if-no-files-found: error
           retention-days: 1
