@@ -26,5 +26,6 @@ jobs:
         with:
           node-version: 24
 
+      # Migration logic lives in a normal script so the generated commit does not need workflow permission.
       - name: Run migration
         run: bash .github/scripts/migrate-retypeset.sh
