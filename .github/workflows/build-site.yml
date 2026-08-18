@@ -41,18 +41,21 @@ jobs:
         working-directory: site
         run: pnpm build
 
-      - name: Skip stale build
+      - name: Check build freshness
+        id: freshness
         shell: bash
         run: |
           set -euxo pipefail
           git fetch origin main
-          if ! git diff --quiet "$GITHUB_SHA" "origin/main" -- site/; then
+          if git diff --quiet "$GITHUB_SHA" "origin/main" -- site/; then
+            echo 'publish=true' >> "$GITHUB_OUTPUT"
+          else
             echo 'A newer site source commit exists; skipping stale publish.'
-            exit 78
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Sync generated site to Pages root
-        if: success()
+        if: steps.freshness.outputs.publish == 'true'
         shell: bash
         run: |
           set -euxo pipefail
@@ -65,7 +68,7 @@ jobs:
           touch .nojekyll
 
       - name: Commit generated Pages output
-        if: success()
+        if: steps.freshness.outputs.publish == 'true'
         shell: bash
         run: |
           set -euxo pipefail
