@@ -18,5 +18,10 @@ lang: zh
 
 <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem 0 2rem;">
   <img src="/assets/iflytek.svg" alt="科大讯飞标志" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
-  <div><strong>科大讯飞</strong><br />助理研究算法工程师</div>
+  <div><strong>科大讯飞</strong><br />算法实习生</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:1rem;margin:0 0 2rem;">
+  <img src="/assets/alibaba.svg" alt="阿里巴巴标志" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
+  <div><strong>阿里巴巴</strong><br />算法实习生</div>
 </div>
