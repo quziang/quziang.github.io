@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: retypeset-publish-main
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,7 +41,18 @@ jobs:
         working-directory: site
         run: pnpm build
 
+      - name: Skip stale build
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git fetch origin main
+          if ! git diff --quiet "$GITHUB_SHA" "origin/main" -- site/; then
+            echo 'A newer site source commit exists; skipping stale publish.'
+            exit 78
+          fi
+
       - name: Sync generated site to Pages root
+        if: success()
         shell: bash
         run: |
           set -euxo pipefail
@@ -50,6 +65,7 @@ jobs:
           touch .nojekyll
 
       - name: Commit generated Pages output
+        if: success()
         shell: bash
         run: |
           set -euxo pipefail
