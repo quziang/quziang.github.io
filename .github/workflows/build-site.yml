@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'site/**'
+      - '.github/workflows/build-site.yml'
   workflow_dispatch:
 
 permissions:
@@ -57,5 +58,6 @@ jobs:
           git add -A
           if ! git diff --cached --quiet; then
             git commit -m 'build: publish Retypeset site'
+            git pull --rebase origin main
             git push origin main
           fi
