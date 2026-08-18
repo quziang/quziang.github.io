@@ -18,5 +18,10 @@ lang: en
 
 <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem 0 2rem;">
   <img src="/assets/iflytek.svg" alt="iFLYTEK logo" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
-  <div><strong>iFLYTEK</strong><br />Assistant Research Algorithm Engineer</div>
+  <div><strong>iFLYTEK</strong><br />Algorithm Intern</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:1rem;margin:0 0 2rem;">
+  <img src="/assets/alibaba.svg" alt="Alibaba logo" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
+  <div><strong>Alibaba</strong><br />Algorithm Intern</div>
 </div>
