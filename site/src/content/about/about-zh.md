@@ -13,3 +13,10 @@ lang: zh
   <img src="/assets/nefu-emblem.svg" alt="东北林业大学校徽" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
   <div><strong>东北林业大学</strong><br />本科 · 2020—2024</div>
 </div>
+
+## 经历
+
+<div style="display:flex;align-items:center;gap:1rem;margin:1.5rem 0 2rem;">
+  <img src="/assets/iflytek.svg" alt="科大讯飞标志" width="54" height="54" style="width:54px;height:54px;margin:0;object-fit:contain;" />
+  <div><strong>科大讯飞</strong><br />助理研究算法工程师</div>
+</div>
